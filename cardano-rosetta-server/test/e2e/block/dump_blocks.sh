@@ -146,12 +146,12 @@ echo "\." >> $OUT_FILE;
 echo "ALTER TABLE public.tx_out DISABLE TRIGGER ALL;" >> $OUT_FILE;
 
 echo "-- Dumping spent outputs" >> $OUT_FILE;
-echo 'COPY public.tx_out (id, tx_id, index, address, address_raw, address_has_script, payment_cred, stake_address_id, value, data_hash, inline_datum_id, reference_script_id) FROM stdin WITH CSV;' >> $OUT_FILE;
+echo 'COPY public.tx_out (id, tx_id, index, address, address_raw, address_has_script, payment_cred, stake_address_id, value, data_hash, inline_datum_id, reference_script_id, consumed_by_tx_in_id) FROM stdin WITH CSV;' >> $OUT_FILE;
 psql -c "\copy (SELECT source_tx_out.* FROM $INPUT_TX_QUERY) to STDOUT WITH CSV" $DB >> $OUT_FILE;
 echo "\." >> $OUT_FILE;
 
 echo "-- Dumping transactions outputs" >> $OUT_FILE;
-echo 'COPY public.tx_out (id, tx_id, index, address, address_raw, address_has_script, payment_cred, stake_address_id, value, data_hash, inline_datum_id, reference_script_id) FROM stdin WITH CSV;' >> $OUT_FILE;
+echo 'COPY public.tx_out (id, tx_id, index, address, address_raw, address_has_script, payment_cred, stake_address_id, value, data_hash, inline_datum_id, reference_script_id, consumed_by_tx_in_id) FROM stdin WITH CSV;' >> $OUT_FILE;
 psql -c "\copy (SELECT * from tx_out WHERE tx_id IN $SELECT_TX_ID) to STDOUT WITH CSV" $DB >> $OUT_FILE;
 echo "\." >> $OUT_FILE;
 

@@ -203,7 +203,7 @@ describe('/block/transactions endpoint', () => {
     expect(response.json()).toEqual(transactionBlock4597861WithWithdrawals);
   });
 
-  test('should return transaction registrations', async () => {
+  test.only('should return transaction registrations', async () => {
     const transaction = '91f88c21679fdc95cb0712dc8a755eab20fdf9e919871c3c668515c830572090';
     const response = await server.inject({
       method: 'post',
@@ -217,6 +217,7 @@ describe('/block/transactions endpoint', () => {
       }
     });
 
+    console.log(JSON.stringify(response.json(), null, "\t"));
     expect(response.statusCode).toEqual(StatusCodes.OK);
     expect(response.json()).toEqual(transactionBlock4490558WithRegistrations);
   });

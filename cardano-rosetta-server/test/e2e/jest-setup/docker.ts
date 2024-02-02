@@ -43,11 +43,11 @@ const setupDBData = async (databaseConfig: DatabaseConfig, user: string, contain
       User: 'root'
     });
 
-    await containerExec(container, [
-      'bash',
-      '-c',
-      `cat ${CONTAINER_TEMP_DIR}/${database}-fixture-data.sql | psql -U ${user} ${database}`
-    ]);
+    // await containerExec(container, [
+    //   'bash',
+    //   '-c',
+    //   `cat ${CONTAINER_TEMP_DIR}/${database}-fixture-data.sql | psql -U ${user} ${database}`
+    // ]);
   }
 };
 
